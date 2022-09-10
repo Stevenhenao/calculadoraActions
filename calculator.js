@@ -4,8 +4,9 @@
  * @param b - The second number to add.
  * @returns The function add is being returned.
  */
+//hola
  function add(a, b) {
-    return a-b;
+    return a+b;
 }
 
 /**
