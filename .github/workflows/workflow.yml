@@ -36,11 +36,13 @@ jobs:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
           HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
     - name: Add Heroku remote
+      id: add
       run: | 
         heroku git:remote --app $HEROKU_API_NAME
-        delay:10
+        echo ::set-output name=exit_code::$?
       env:
           HEROKU_API_NAME: ${{ secrets.HEROKU_API_NAME }}
           
     - name: Push to Heroku
+      if: steps.add.outputs.exit_code == 0
       run: git push heroku master
